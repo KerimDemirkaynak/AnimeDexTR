@@ -1,4 +1,4 @@
-/* ANIME TEMASI - FINAL (V10.1 - MOBİL KÜÇÜK ARAMA) */
+/* ANIME TEMASI - FINAL (V11 - MOBİL DÜZELTME) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -44,20 +44,20 @@ header {
 .logo { display: flex; align-items: center; height: 100%; }
 .logo img { height: 28px; width: auto; object-fit: contain; }
 
-/* Arama Kutusu (Masaüstü Varsayılan) */
+/* Arama Kutusu (Masaüstü Standart) */
 .search-box {
     position: relative;
-    width: 220px;
+    width: 250px; /* Masaüstü genişliği */
 }
 .search-box input {
     width: 100%;
     background: #000;
     border: 1px solid #333;
-    padding: 6px 35px 6px 15px;
-    border-radius: 15px;
+    padding: 8px 35px 8px 15px;
+    border-radius: 20px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     transition: all 0.3s;
 }
 .search-box input:focus { border-color: var(--primary); }
@@ -73,7 +73,6 @@ header {
     cursor: pointer;
     font-size: 14px;
     padding: 5px;
-    transition: 0.3s;
 }
 .search-btn:hover { color: var(--primary); }
 
@@ -225,29 +224,31 @@ footer {
 }
 .footer-content p { color: #777; font-size: 13px; margin: 5px 0; }
 
-/* --- MOBİL UYUM (GÜNCELLENDİ) --- */
+/* MOBİL ÖZEL AYARLAR (Burada düzeltme yapıldı) */
 @media (max-width: 900px) {
     .watch-container { flex-direction: column; }
     .sidebar { width: 100%; }
-    .hero-wrapper { height: 350px; }
+    
+    .hero-wrapper { height: 300px; }
     .hero-poster { display: none; }
-    .hero-info h2 { font-size: 28px; }
-
-    /* Arama Kutusu Mobilde Küçültüldü ama Aktif */
+    .hero-info h2 { font-size: 24px; }
+    
+    /* Mobilde Arama Kutusu: Görünür ama Küçük */
     .search-box { 
-        width: 140px; /* Daha dar ama görünebilir */
-    } 
-    .search-box input { 
-        width: 100%;
-        padding: 5px 28px 5px 10px; 
-        font-size: 11px;
-        background: #000;
-        border: 1px solid #333;
+        width: 150px; /* Genişliği azalttık */
     }
-    .search-btn { 
-        font-size: 12px; 
-        right: 5px; 
+    .search-box input {
+        width: 100%;
+        padding: 6px 30px 6px 10px; /* İç boşluğu azalttık */
+        font-size: 11px; /* Yazıyı küçülttük */
+        border-radius: 15px;
+    }
+    .search-btn {
+        right: 5px;
+        font-size: 12px; /* İkonu küçülttük */
+        padding: 4px;
     }
 
-    #anime-listesi { grid-template-columns: repeat(2, 1fr); gap: 15px; } 
+    /* Kartlar mobilde yan yana 2 tane */
+    #anime-listesi { grid-template-columns: repeat(2, 1fr); gap: 10px; } 
 }
