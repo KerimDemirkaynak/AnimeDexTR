@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnimeDexTR - Anime İzle</title>
+    <title>AnimeDexTR - Ücretsiz Anime İzle</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -12,53 +12,94 @@
     <header>
         <a href="index.html" class="logo">ANIME<span>DEX</span>TR</a>
         <div class="search-box">
-            <input type="text" id="aramaInput" placeholder="Anime Ara..." onkeyup="aramaYap()">
+            <input type="text" id="aramaInput" placeholder="Anime ara..." onkeyup="aramaYap()">
             <i class="fa fa-search"></i>
         </div>
     </header>
 
-    <div class="hero-section">
-        <h2 class="section-title">Popüler Seriler</h2>
-        <div id="anime-listesi">
+    <div class="hero-wrapper" id="spotlight-area" style="display:none;">
+        <div class="hero-bg" id="hero-bg"></div>
+        <div class="hero-content">
+            <img src="" class="hero-poster" id="hero-poster">
+            <div class="hero-info">
+                <div class="hero-meta">
+                    <span><i class="fa fa-circle-play"></i> TV Serisi</span>
+                    <span><i class="fa fa-calendar"></i> Güncel</span>
+                    <span style="background: var(--primary); color:black; padding:0 5px; border-radius:3px; font-weight:bold;">HD</span>
+                </div>
+                <h2 id="hero-title">Anime Başlığı</h2>
+                <p style="color:#ddd; margin-bottom:20px; line-height:1.5; max-width:600px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;" id="hero-desc">
+                    Özet bilgisi buraya gelecek...
+                </p>
+                <a href="#" class="btn-watch" id="hero-btn"><i class="fa fa-play"></i> Hemen İzle</a>
             </div>
+        </div>
     </div>
 
-    <script src="veri/seriler.js"></script>
+    <div class="container">
+        <div class="section-header">
+            <h2>Yeni Eklenenler</h2>
+        </div>
+        
+        <div id="anime-listesi">
+            <div style="color: #666; text-align: center; width: 100%;">Yükleniyor...</div>
+        </div>
+    </div>
 
-    <script>
+    <script src="veri/seriler.js" onerror="alert('veri/seriler.js bulunamadı!')"></script>
+    <script src="veri/detaylar/beyblade.js"></script> <script>
         const listeDiv = document.getElementById('anime-listesi');
 
-        // Serileri Listele
-        if (typeof TUM_SERILER !== 'undefined') {
-            TUM_SERILER.forEach(anime => {
-                const html = `
-                <a href="izle.html?id=${anime.id}" class="anime-card">
-                    <div class="poster-wrapper">
-                        <img src="${anime.poster}" alt="${anime.isim}" loading="lazy">
-                        <div class="ep-badge">${anime.bolumSayisi} BÖLÜM</div>
-                    </div>
-                    <div class="card-info">
-                        <div class="anime-title">${anime.isim}</div>
-                    </div>
-                </a>`;
-                listeDiv.innerHTML += html;
-            });
-        } else {
-            listeDiv.innerHTML = "<h3 style='color:white'>Veri dosyası bulunamadı!</h3>";
-        }
+        window.addEventListener('load', () => {
+            if (typeof TUM_SERILER !== 'undefined') {
+                listeDiv.innerHTML = "";
+                
+                // 1. ANIME LİSTESİNİ DOLDUR
+                TUM_SERILER.forEach(anime => {
+                    const html = `
+                    <a href="izle.html?id=${anime.id}" class="anime-card">
+                        <div class="poster-box">
+                            <span class="ep-tag">${anime.bolumSayisi}</span>
+                            <img src="${anime.poster}" loading="lazy" onerror="this.src='https://via.placeholder.com/200x300?text=Resim+Yok'">
+                            <div class="hover-play"><i class="fa fa-play-circle"></i></div>
+                        </div>
+                        <div class="card-info">
+                            <div class="anime-title">${anime.isim}</div>
+                            <div class="anime-meta">
+                                <span>TV</span>
+                                <span>24dk</span>
+                            </div>
+                        </div>
+                    </a>`;
+                    listeDiv.innerHTML += html;
+                });
 
-        // Basit Arama
+                // 2. SPOTLIGHT (RASTGELE BİR ANİME SEÇ)
+                if(TUM_SERILER.length > 0) {
+                    const randomAnime = TUM_SERILER[Math.floor(Math.random() * TUM_SERILER.length)];
+                    
+                    // Spotlight alanını güncelle
+                    document.getElementById('spotlight-area').style.display = 'flex';
+                    document.getElementById('hero-bg').style.backgroundImage = `url('${randomAnime.poster}')`;
+                    document.getElementById('hero-poster').src = randomAnime.poster;
+                    document.getElementById('hero-title').innerText = randomAnime.isim;
+                    document.getElementById('hero-btn').href = `izle.html?id=${randomAnime.id}`;
+                    
+                    // Özet bilgisini çekmeye çalış (İsteğe bağlı, şimdilik sabit metin)
+                    document.getElementById('hero-desc').innerText = "Bu animenin detaylarını izleme sayfasında bulabilirsiniz. AnimeDexTR keyifli seyirler diler!";
+                }
+
+            } else {
+                listeDiv.innerHTML = "<h3 style='color:white'>Liste Yüklenemedi</h3>";
+            }
+        });
+
         function aramaYap() {
             const input = document.getElementById('aramaInput').value.toLowerCase();
             const cards = document.getElementsByClassName('anime-card');
-
             for (let i = 0; i < cards.length; i++) {
                 let title = cards[i].querySelector(".anime-title").innerText.toLowerCase();
-                if (title.includes(input)) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
+                cards[i].style.display = title.includes(input) ? "block" : "none";
             }
         }
     </script>
