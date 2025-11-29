@@ -15,10 +15,9 @@
             <img src="https://hianime.pe/images/logo.png?v=0.1" alt="AnimeDexTR">
         </a>
         <div class="search-box">
-            <form onsubmit="event.preventDefault(); aramaYonlendir();">
+            <form onsubmit="event.preventDefault(); aramaYonlendir();" class="search-form">
                 <input type="text" id="aramaInput" placeholder="Anime ara..." required>
-                <button type="submit" style="display:none;"></button>
-                <i class="fa fa-search"></i>
+                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
             </form>
         </div>
     </header>
@@ -50,11 +49,14 @@
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2024 AnimeDexTR - Ücretsiz Anime İzleme Platformu</p>
+            <p>&copy; <span id="yil"></span> AnimeDexTR - Kâr amacı gütmeyen bir projedir.</p>
         </div>
     </footer>
 
     <script>
+        // Footer Yılı
+        document.getElementById('yil').innerText = new Date().getFullYear();
+
         const urlParams = new URLSearchParams(window.location.search);
         const animeId = urlParams.get('id');
 
