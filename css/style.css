@@ -1,15 +1,14 @@
-/* MODERN ANIME TEMASI - STYLE.CSS (V6 - FIX) */
+/* ANIME TEMASI - FINAL DÜZELTME (style.css) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
     --bg-body: #14151a;
     --bg-header: rgba(20, 21, 26, 0.98);
-    --bg-card: #1f2125;
-    --primary: #ffbade;
+    --bg-card: #2a2c31;
+    --primary: #ffbade;       /* Pembe Vurgu */
     --primary-hover: #ff9ecd;
     --text-white: #ffffff;
     --text-gray: #aaaaaa;
-    --card-radius: 6px; /* Kart köşeleri biraz daha keskinleşti */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
@@ -29,65 +28,72 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
 /* --- HEADER --- */
 header {
     background-color: var(--bg-header);
-    backdrop-filter: blur(10px);
-    padding: 0 5%;
+    padding: 15px 5%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo ve Aramayı iki uca iter */
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid rgba(255,255,255,0.05);
-    height: 60px;
+    height: 70px;
 }
 
-.logo { display: flex; align-items: center; height: 100%; }
-.logo img { height: 35px; width: auto; object-fit: contain; }
-
-/* Düzeltilmiş Arama Kutusu */
-.search-box {
-    position: relative;
-    width: 300px;
-}
-.search-form {
+.logo {
     display: flex;
     align-items: center;
-    width: 100%;
-    position: relative;
+    height: 100%;
 }
-.search-box input {
-    width: 100%;
+
+.logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Düzgün Arama Kutusu */
+.search-container {
     background: #000;
     border: 1px solid #333;
-    padding: 8px 40px 8px 15px; /* Buton için sağdan boşluk */
-    border-radius: 20px;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-    transition: all 0.3s;
+    border-radius: 25px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    transition: 0.3s;
 }
-.search-box input:focus { border-color: var(--primary); }
 
-/* Tıklanabilir Arama Butonu */
+.search-container:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(255, 186, 222, 0.2);
+}
+
+.search-container input {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 5px;
+    width: 100%; /* Kalan alanı doldur */
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
 .search-btn {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
     background: none;
     border: none;
     color: var(--text-gray);
     cursor: pointer;
-    padding: 5px 10px;
-    font-size: 14px;
+    font-size: 16px;
+    padding: 5px;
     transition: 0.3s;
 }
+
 .search-btn:hover { color: var(--primary); }
 
 /* --- SPOTLIGHT --- */
 .hero-wrapper {
-    position: relative; width: 100%; height: 380px; /* Yükseklik azaltıldı */
-    overflow: hidden; display: flex; align-items: center; margin-bottom: 20px;
+    position: relative; width: 100%; height: 400px;
+    overflow: hidden; display: flex; align-items: center; margin-bottom: 30px;
 }
 .hero-bg {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -99,48 +105,47 @@ header {
     margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 30px;
 }
 .hero-poster {
-    width: 180px; height: 270px; border-radius: 8px; /* Poster küçültüldü */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: cover;
+    width: 220px; height: 320px; border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6); object-fit: cover;
 }
 .hero-info h2 {
-    font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 10px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    font-size: 36px; font-weight: 800; line-height: 1.2; margin-bottom: 10px;
+    color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 .hero-meta {
-    display: flex; gap: 15px; margin-bottom: 15px; font-size: 12px; color: #ddd;
+    display: flex; gap: 15px; margin-bottom: 15px; font-size: 13px; color: #ddd;
 }
 .btn-watch {
-    background: var(--primary); color: #000; padding: 8px 25px; border-radius: 20px;
-    font-weight: 600; display: inline-flex; align-items: center; gap: 8px; font-size: 13px;
+    background: var(--primary); color: #000; padding: 10px 30px; border-radius: 30px;
+    font-weight: 600; display: inline-flex; align-items: center; gap: 8px; font-size: 14px;
 }
 .btn-watch:hover { transform: scale(1.05); background: var(--primary-hover); }
 
-/* --- LİSTE ALANI (DÜZELTİLDİ: DAHA KÜÇÜK KARTLAR) --- */
+/* --- LİSTE ALANI (Eski Güzel Kartlar) --- */
 .container {
     max-width: 1400px; margin: 0 auto; padding: 0 20px 40px 20px; width: 100%;
 }
 .section-header {
-    margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 10px;
+    margin-bottom: 20px; border-left: 5px solid var(--primary); padding-left: 15px;
 }
-.section-header h2 { font-size: 18px; font-weight: 600; color: var(--text-white); }
+.section-header h2 { font-size: 22px; font-weight: 600; color: var(--text-white); }
 
 #anime-listesi {
     display: grid;
-    /* Kart genişliği 140px'e düşürüldü, daha fazla kart sığacak */
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-    gap: 15px;
+    /* Kartlar ekran boyutuna göre otomatik sığacak (Minimum 180px) */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 20px;
 }
 
 .anime-card {
-    position: relative; border-radius: var(--card-radius); overflow: hidden;
-    background: transparent; /* Kart arkaplanı kaldırıldı */
-    transition: transform 0.2s;
+    position: relative; border-radius: 8px; overflow: hidden;
+    background: transparent; transition: transform 0.2s;
 }
-.anime-card:hover { transform: translateY(-3px); }
+.anime-card:hover { transform: translateY(-5px); }
 
 .poster-box {
     position: relative; width: 100%; aspect-ratio: 2/3; 
-    overflow: hidden; border-radius: var(--card-radius);
+    overflow: hidden; border-radius: 8px;
 }
 .poster-box img {
     width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;
@@ -149,77 +154,79 @@ header {
 
 .hover-play {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4); display: flex; justify-content: center;
+    background: rgba(0,0,0,0.5); display: flex; justify-content: center;
     align-items: center; opacity: 0; transition: 0.2s;
 }
 .anime-card:hover .hover-play { opacity: 1; }
-.hover-play i { font-size: 35px; color: var(--primary); }
+.hover-play i { font-size: 45px; color: var(--primary); filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); }
 
-.card-info { padding: 8px 0; } /* Padding azaltıldı */
+.card-info { padding: 10px 5px; }
 .anime-title {
-    font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden;
-    text-overflow: ellipsis; color: #ddd; display: block;
+    font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; color: #eee; display: block;
 }
 .anime-meta {
-    font-size: 11px; color: var(--text-gray); margin-top: 2px;
+    font-size: 12px; color: var(--text-gray); margin-top: 5px;
     display: flex; justify-content: space-between;
 }
 .ep-tag {
-    position: absolute; top: 5px; left: 5px; background: rgba(0,0,0,0.7);
-    color: #fff; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px;
+    position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.8);
+    color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 4px;
 }
 
 /* --- İZLEME SAYFASI --- */
 .watch-container {
-    display: flex; gap: 20px; max-width: 1400px; margin: 20px auto; padding: 0 20px;
+    display: flex; gap: 25px; max-width: 1400px; margin: 30px auto; padding: 0 20px;
     align-items: flex-start;
 }
 .main-content { flex: 1; min-width: 0; }
-.sidebar { width: 320px; flex-shrink: 0; }
+.sidebar { width: 350px; flex-shrink: 0; }
 
 .player-box {
     position: relative; padding-bottom: 56.25%; background: #000;
-    border-radius: 8px; overflow: hidden; margin-bottom: 20px;
+    border-radius: 10px; overflow: hidden; margin-bottom: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 .player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
 .anime-info-box {
-    background: var(--bg-card); padding: 15px; border-radius: 8px; margin-bottom: 20px;
+    background: var(--bg-card); padding: 25px; border-radius: 10px; margin-bottom: 25px;
 }
-.anime-info-box h1 { color: var(--primary); margin-bottom: 8px; font-size: 20px; }
-.anime-info-box p { color: #ccc; font-size: 13px; line-height: 1.5; }
+.anime-info-box h1 { color: var(--primary); margin-bottom: 15px; font-size: 26px; }
+.anime-info-box p { color: #ccc; font-size: 14px; line-height: 1.6; }
 
-.comments-section { background: var(--bg-card); padding: 20px; border-radius: 8px; }
-.comments-section h2 { font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+.comments-section { background: var(--bg-card); padding: 25px; border-radius: 10px; }
+.comments-section h2 { font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
 
+/* Bölüm Listesi */
 .ep-list-header {
-    background: #25262b; padding: 10px; border-radius: 8px 8px 0 0;
-    font-weight: bold; color: var(--primary); font-size: 13px;
+    background: #25262b; padding: 15px; border-radius: 10px 10px 0 0;
+    font-weight: bold; color: var(--primary); font-size: 15px; text-align: center;
 }
 .ep-list-body {
-    background: var(--bg-card); padding: 8px; max-height: 500px;
-    overflow-y: auto; border-radius: 0 0 8px 8px;
+    background: var(--bg-card); padding: 10px; max-height: 600px;
+    overflow-y: auto; border-radius: 0 0 10px 10px;
 }
 .ep-btn {
-    display: flex; align-items: center; padding: 8px; margin-bottom: 4px;
-    background: #18191d; border-radius: 4px; cursor: pointer;
-    transition: 0.2s; font-size: 12px; color: #ccc; text-decoration: none;
+    display: flex; align-items: center; padding: 12px; margin-bottom: 5px;
+    background: #18191d; border-radius: 6px; cursor: pointer;
+    transition: 0.2s; font-size: 13px; color: #ccc; text-decoration: none;
 }
 .ep-btn:hover, .ep-btn.active { background: var(--primary); color: #000; font-weight: 600; }
-.ep-btn i { margin-right: 8px; font-size: 10px; }
+.ep-btn i { margin-right: 10px; font-size: 12px; }
 
-/* FOOTER DÜZENLEMESİ */
+/* FOOTER */
 footer {
-    background: #111; padding: 15px 20px; margin-top: auto; border-top: 1px solid #222; text-align: center;
+    background: #111; padding: 20px; margin-top: auto; border-top: 1px solid #222; text-align: center;
 }
-.footer-content p { color: #666; font-size: 11px; margin: 2px 0; }
+.footer-content p { color: #666; font-size: 12px; margin: 5px 0; }
 
+/* Mobil Uyum */
 @media (max-width: 900px) {
     .watch-container { flex-direction: column; }
     .sidebar { width: 100%; }
-    .hero-wrapper { height: 300px; }
+    .hero-wrapper { height: 350px; }
     .hero-poster { display: none; }
-    .search-box { width: 40px; }
-    .search-box input { padding: 0; width: 0; border: none; background: transparent; }
-    .search-btn { position: static; color: white; font-size: 18px; padding: 0; }
+    .search-box { width: 40px; } /* Mobilde arama butonu */
+    #anime-listesi { grid-template-columns: repeat(2, 1fr); gap: 15px; } /* Mobilde yan yana 2 kart */
 }
