@@ -1,12 +1,14 @@
 [
   {
     "id": "beyblade",
-    "isim": "Beyblade",
-    "poster": "https://ornek.com/beyblade.jpg"
+    "isim": "Beyblade (1. Sezon)",
+    "poster": "https://m.media-amazon.com/images/M/MV5BNDgwY2YyZmQtMWIyNS00Y2MyLWJlYjMtNDc5YjYzOThhZjFhXkEyXkFqcGdeQXVyMTI2NTUS._V1_.jpg",
+    "bolumSayisi": "51"
   },
   {
     "id": "pokemon",
     "isim": "Pokemon",
-    "poster": "https://ornek.com/pokemon.jpg"
+    "poster": "https://upload.wikimedia.org/wikipedia/tr/9/94/Pokemon_poster.jpg",
+    "bolumSayisi": "276"
   }
 ]
