@@ -15,12 +15,10 @@
             <img src="https://hianime.pe/images/logo.png?v=0.1" alt="AnimeDexTR">
         </a>
         
-        <div class="search-box">
-            <form onsubmit="event.preventDefault(); aramaYap();" class="search-form">
-                <input type="text" id="aramaInput" placeholder="Anime ara..." required>
-                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
+        <form onsubmit="event.preventDefault(); aramaYap();" class="search-container">
+            <input type="text" id="aramaInput" placeholder="Anime ara..." required autocomplete="off">
+            <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+        </form>
     </header>
 
     <div class="hero-wrapper" id="spotlight-area" style="display:none;">
@@ -29,9 +27,9 @@
             <img src="" class="hero-poster" id="hero-poster">
             <div class="hero-info">
                 <div class="hero-meta">
-                    <span><i class="fa fa-circle-play"></i> TV</span>
+                    <span><i class="fa fa-circle-play"></i> TV Serisi</span>
                     <span><i class="fa fa-calendar"></i> Güncel</span>
-                    <span style="background: var(--primary); color:black; padding:0 5px; border-radius:3px; font-weight:bold;">HD</span>
+                    <span style="background: var(--primary); color:black; padding:2px 6px; border-radius:3px; font-weight:bold;">HD</span>
                 </div>
                 <h2 id="hero-title">Yükleniyor...</h2>
                 <p id="hero-desc" style="color:#ddd; margin-bottom:20px; line-height:1.5; max-width:600px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">...</p>
@@ -51,8 +49,7 @@
 
     <footer>
         <div class="footer-content">
-            <p>&copy; <span id="yil"></span> AnimeDexTR - Kâr amacı gütmeyen bir projedir.</p>
-            <p>İletişim: contact@animedex.tr</p>
+            <p>&copy; <span id="yil"></span> AnimeDexTR - Ücretsiz Anime İzleme Platformu</p>
         </div>
     </footer>
 
@@ -67,6 +64,7 @@
             if (typeof TUM_SERILER !== 'undefined') {
                 listeDiv.innerHTML = "";
                 
+                // KARTLARI OLUŞTUR
                 TUM_SERILER.forEach(anime => {
                     const html = `
                     <a href="izle.html?id=${anime.id}" class="anime-card">
@@ -86,7 +84,7 @@
                     listeDiv.innerHTML += html;
                 });
 
-                // SPOTLIGHT
+                // SPOTLIGHT (Rastgele Anime ve Özet Çekme)
                 const urlParams = new URLSearchParams(window.location.search);
                 if (!urlParams.get('q') && TUM_SERILER.length > 0) {
                     const randomAnime = TUM_SERILER[Math.floor(Math.random() * TUM_SERILER.length)];
@@ -101,19 +99,20 @@
                     script.src = `veri/detaylar/${randomAnime.id}.js`;
                     script.onload = function() {
                         if (typeof ANIME_DETAY !== 'undefined') {
-                            document.getElementById('hero-desc').innerText = ANIME_DETAY.ozet || "Özet bulunamadı.";
+                            document.getElementById('hero-desc').innerText = ANIME_DETAY.ozet || "Özet bilgisi bulunamadı.";
                             window.ANIME_DETAY = undefined; 
                         }
                     };
                     document.body.appendChild(script);
                 } else if (urlParams.get('q')) {
+                    // Linkten arama gelmişse
                     document.getElementById('aramaInput').value = urlParams.get('q');
                     aramaYap();
                 }
             }
         });
 
-        // DÜZELTİLMİŞ ARAMA
+        // ARAMA FONKSİYONU
         function aramaYap() {
             const input = document.getElementById('aramaInput').value.toLowerCase();
             const cards = document.getElementsByClassName('anime-card');
