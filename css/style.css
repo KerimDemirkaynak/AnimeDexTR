@@ -235,7 +235,7 @@ footer {
     
     /* Arama Kutusu: İdeal Boyut (180px) */
     .search-box { 
-        width: 140px; 
+        width: 160px; 
     }
     .search-box input {
         padding: 8px 35px 8px 15px;
