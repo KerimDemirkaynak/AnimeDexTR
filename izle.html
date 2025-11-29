@@ -3,9 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime İzle</title>
+    <title>İzle - AnimeDexTR</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* İzleme Sayfasına Özel Eklemeler */
+        .watch-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        .main-content { flex: 3; }
+        .sidebar { flex: 1; min-width: 300px; }
+
+        .player-box {
+            position: relative;
+            padding-bottom: 56.25%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .player-box iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        .anime-info-box {
+            background: #2a2c31;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        .anime-info-box h1 { color: var(--primary); margin-bottom: 10px; }
+        .anime-info-box p { color: #ccc; font-size: 14px; line-height: 1.6; }
+
+        .ep-list-header {
+            background: #2a2c31;
+            padding: 15px;
+            border-radius: 12px 12px 0 0;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .ep-list-body {
+            background: #23252b;
+            padding: 10px;
+            height: 500px;
+            overflow-y: auto;
+            border-radius: 0 0 12px 12px;
+        }
+        .ep-btn {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 5px;
+            background: #151618;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 13px;
+            color: #ddd;
+        }
+        .ep-btn:hover, .ep-btn.active {
+            background: var(--primary);
+            color: #000;
+            font-weight: 600;
+        }
+        .ep-btn i { margin-right: 10px; }
+
+        @media (max-width: 900px) {
+            .watch-container { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .ep-list-body { max-height: 300px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -15,21 +87,21 @@
 
     <div class="watch-container">
         <div class="main-content">
-            <div class="player-wrapper" id="oynatici-kutu">
-                <div style="display:flex; height:100%; align-items:center; justify-content:center; position:absolute; width:100%;">
-                    <p style="color:#666;"><i class="fa fa-play-circle" style="font-size:50px;"></i><br>Bölüm Seçin</p>
+            <div class="player-box" id="oynatici">
+                <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:#555; text-align:center;">
+                    <i class="fa fa-play-circle" style="font-size:60px;"></i><br>Bölüm Seçiniz
                 </div>
             </div>
             
-            <div class="anime-details">
+            <div class="anime-info-box">
                 <h1 id="baslik">Yükleniyor...</h1>
                 <p id="ozet">...</p>
             </div>
         </div>
 
         <div class="sidebar">
-            <div class="sidebar-header">BÖLÜMLER</div>
-            <div class="episode-list" id="bolum-listesi"></div>
+            <div class="ep-list-header">BÖLÜMLER</div>
+            <div class="ep-list-body" id="bolum-listesi"></div>
         </div>
     </div>
 
@@ -43,38 +115,40 @@
             
             script.onload = function() {
                 if (typeof ANIME_DETAY !== 'undefined') {
-                    sayfayiDoldur(ANIME_DETAY);
+                    yukle(ANIME_DETAY);
                 }
+            };
+            script.onerror = function() {
+                document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:50px;'>Anime Bulunamadı</h1>";
             };
             document.body.appendChild(script);
         }
 
-        function sayfayiDoldur(anime) {
+        function yukle(anime) {
             document.getElementById('baslik').innerText = anime.isim;
             document.getElementById('ozet').innerText = anime.ozet;
             document.title = anime.isim + " - İzle";
 
-            const liste = document.getElementById('bolum-listesi');
-            const oynaticiKutu = document.getElementById('oynatici-kutu');
+            const listeDiv = document.getElementById('bolum-listesi');
+            const oynatici = document.getElementById('oynatici');
 
             anime.bolumler.forEach((bolum, index) => {
                 const btn = document.createElement('div');
                 btn.className = 'ep-btn';
-                btn.innerHTML = `<i class="fa fa-play"></i> <span>${bolum.no}. Bölüm - ${bolum.baslik}</span>`;
+                btn.innerHTML = `<i class="fa fa-play"></i> Bölüm ${bolum.no}: ${bolum.baslik}`;
                 
                 btn.onclick = () => {
-                    oynaticiKutu.innerHTML = `<iframe src="${bolum.link}" allowfullscreen frameborder="0"></iframe>`;
+                    oynatici.innerHTML = `<iframe src="${bolum.link}" allowfullscreen></iframe>`;
                     document.getElementById('baslik').innerText = `${anime.isim} - ${bolum.no}. Bölüm`;
                     
-                    // Aktif buton rengi (Basit mantık)
-                    document.querySelectorAll('.ep-btn').forEach(b => b.style.borderLeft = "3px solid transparent");
-                    btn.style.borderLeft = "3px solid var(--accent)";
-                    btn.style.backgroundColor = "var(--bg-element)";
+                    // Aktif butonu boya
+                    document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
                 };
 
-                liste.appendChild(btn);
+                listeDiv.appendChild(btn);
 
-                // İlk bölümü otomatik aç
+                // İlk bölümü aç
                 if(index === 0) btn.click();
             });
         }
