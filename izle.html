@@ -14,12 +14,10 @@
         <a href="index.html" class="logo">
             <img src="https://hianime.pe/images/logo.png?v=0.1" alt="AnimeDexTR">
         </a>
-        <div class="search-box">
-            <form onsubmit="event.preventDefault(); aramaYonlendir();" class="search-form">
-                <input type="text" id="aramaInput" placeholder="Anime ara..." required>
-                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
+        <form onsubmit="event.preventDefault(); aramaYonlendir();" class="search-container">
+            <input type="text" id="aramaInput" placeholder="Anime ara..." required>
+            <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+        </form>
     </header>
 
     <div class="watch-container">
@@ -49,12 +47,11 @@
 
     <footer>
         <div class="footer-content">
-            <p>&copy; <span id="yil"></span> AnimeDexTR - Kâr amacı gütmeyen bir projedir.</p>
+            <p>&copy; <span id="yil"></span> AnimeDexTR - Ücretsiz Anime İzleme Platformu</p>
         </div>
     </footer>
 
     <script>
-        // Footer Yılı
         document.getElementById('yil').innerText = new Date().getFullYear();
 
         const urlParams = new URLSearchParams(window.location.search);
