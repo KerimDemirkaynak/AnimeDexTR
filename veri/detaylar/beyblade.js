@@ -5,17 +5,17 @@ const ANIME_DETAY = {
     {
       "no": 1,
       "baslik": "Beyblade Savaşçısı Takao",
-      "link": "https://www.youtube.com/watch?v=N77YpPDSsyI"
+      "link": "https://video.sibnet.ru/shell.php?videoid=4976317"
     },
     {
       "no": 2,
       "baslik": "Ejderin Gücü",
-      "link": "https://www.youtube.com/embed/VIDEO_ID_2"
+      "link": "https://video.sibnet.ru/shell.php?videoid=4768205"
     },
     {
       "no": 3,
       "baslik": "Yeni Bir Arkadaş",
-      "link": "https://www.youtube.com/embed/VIDEO_ID_3"
+      "link": "https://video.sibnet.ru/shell.php?videoid=4629141"
     }
   ]
 };
