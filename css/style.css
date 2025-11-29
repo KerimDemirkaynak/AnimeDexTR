@@ -1,4 +1,4 @@
-/* ANIME TEMASI - FINAL (V12 - İDEAL MOBİL ARAMA) */
+/* ANIME TEMASI - FINAL (V12.1 - MOBİL ARAMA REVIZE) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -225,7 +225,7 @@ footer {
 }
 .footer-content p { color: #777; font-size: 13px; margin: 5px 0; }
 
-/* MOBİL UYUM (DÜZELTİLDİ) */
+/* MOBİL UYUM */
 @media (max-width: 900px) {
     .watch-container { flex-direction: column; }
     .sidebar { width: 100%; }
@@ -233,9 +233,9 @@ footer {
     .hero-poster { display: none; }
     .hero-info h2 { font-size: 28px; }
     
-    /* Arama Kutusu: İdeal Boyut (150px çok küçüktü, 220px yaptık) */
+    /* Arama Kutusu: İdeal Boyut (180px) */
     .search-box { 
-        width: 220px; 
+        width: 180px; 
     }
     .search-box input {
         padding: 8px 35px 8px 15px;
