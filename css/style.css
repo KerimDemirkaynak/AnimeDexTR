@@ -1,4 +1,4 @@
-/* ANIME TEMASI - FINAL (V10 - KÜÇÜK ARAMA) */
+/* ANIME TEMASI - FINAL (V10.1 - MOBİL KÜÇÜK ARAMA) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -38,26 +38,26 @@ header {
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid rgba(255,255,255,0.05);
-    height: 60px; /* Header yüksekliği biraz düşürüldü */
+    height: 60px;
 }
 
 .logo { display: flex; align-items: center; height: 100%; }
 .logo img { height: 28px; width: auto; object-fit: contain; }
 
-/* Arama Kutusu (KÜÇÜLTÜLDÜ) */
+/* Arama Kutusu (Masaüstü Varsayılan) */
 .search-box {
     position: relative;
-    width: 220px; /* Genişlik 300px'den 220px'e düştü */
+    width: 220px;
 }
 .search-box input {
     width: 100%;
     background: #000;
     border: 1px solid #333;
-    padding: 6px 35px 6px 15px; /* Daha ince yapıldı */
+    padding: 6px 35px 6px 15px;
     border-radius: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    font-size: 12px; /* Yazı boyutu hafif küçültüldü */
+    font-size: 12px;
     transition: all 0.3s;
 }
 .search-box input:focus { border-color: var(--primary); }
@@ -225,15 +225,29 @@ footer {
 }
 .footer-content p { color: #777; font-size: 13px; margin: 5px 0; }
 
-/* Mobil Uyum */
+/* --- MOBİL UYUM (GÜNCELLENDİ) --- */
 @media (max-width: 900px) {
     .watch-container { flex-direction: column; }
     .sidebar { width: 100%; }
     .hero-wrapper { height: 350px; }
     .hero-poster { display: none; }
     .hero-info h2 { font-size: 28px; }
-    .search-box { width: 40px; } 
-    .search-box input { padding: 0; width: 0; border: none; background: transparent; }
-    .search-btn { position: static; color: white; font-size: 20px; padding: 0; right: 0; }
+
+    /* Arama Kutusu Mobilde Küçültüldü ama Aktif */
+    .search-box { 
+        width: 140px; /* Daha dar ama görünebilir */
+    } 
+    .search-box input { 
+        width: 100%;
+        padding: 5px 28px 5px 10px; 
+        font-size: 11px;
+        background: #000;
+        border: 1px solid #333;
+    }
+    .search-btn { 
+        font-size: 12px; 
+        right: 5px; 
+    }
+
     #anime-listesi { grid-template-columns: repeat(2, 1fr); gap: 15px; } 
 }
