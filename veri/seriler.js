@@ -8,7 +8,7 @@ const TUM_SERILER = [
   {
     "id": "pokemon",
     "isim": "Pokemon",
-    "poster": "./static/pokemon-poster.jpg",
+    "poster": "https://m.media-amazon.com/images/I/612F8bfniwL._AC_UF894,1000_QL80_.jpg",
     "bolumSayisi": "276"
   }
 ];
