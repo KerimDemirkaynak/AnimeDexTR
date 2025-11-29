@@ -108,8 +108,14 @@
             }
         }
 
-        // Giscus Yorum Sistemi
+        // Giscus Yorum Sistemi (DÜZELTİLDİ)
         document.addEventListener("DOMContentLoaded", function () {
+            // ID'yi tekrar alıyoruz ki yorumları ona göre ayıralım
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentAnimeId = urlParams.get('id');
+
+            if (!currentAnimeId) return; // ID yoksa yorum yükleme
+
             const giscusContainer = document.getElementById("giscus-container");
             const script = document.createElement("script");
             script.src = "https://giscus.app/client.js";
@@ -119,7 +125,12 @@
             script.setAttribute("data-category", "Yorumlar");
             script.setAttribute("data-category-id", "DIC_kwDOPPm0QM4CtM73");
             
-            script.setAttribute("data-mapping", "pathname");
+            // --- DEĞİŞİKLİK BURADA ---
+            // "pathname" yerine "specific" yapıyoruz
+            script.setAttribute("data-mapping", "specific");
+            // Yorumları bu ID'ye (örn: beyblade) göre eşle diyoruz
+            script.setAttribute("data-term", currentAnimeId); 
+            
             script.setAttribute("data-strict", "0");
             script.setAttribute("data-reactions-enabled", "1");
             script.setAttribute("data-emit-metadata", "0");
