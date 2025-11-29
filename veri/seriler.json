@@ -1,0 +1,12 @@
+[
+  {
+    "id": "beyblade",
+    "isim": "Beyblade",
+    "poster": "https://ornek.com/beyblade.jpg"
+  },
+  {
+    "id": "pokemon",
+    "isim": "Pokemon",
+    "poster": "https://ornek.com/pokemon.jpg"
+  }
+]
