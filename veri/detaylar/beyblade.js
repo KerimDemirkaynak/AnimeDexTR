@@ -9,7 +9,7 @@ const ANIME_DETAY = {
       "baslik": "Fragman 1",
       // ÇOKLU KAYNAK YAPISI
       "kaynaklar": [
-        { "isim": "Dailymotion", "link": "https://www.dailymotion.com/embed/video/1jbj1okmm9ae17d807f" },
+        { "isim": "OKRU", "link": "https://ok.ru/videoembed/1214694558403" },
         { "isim": "YouTube", "link": "https://youtube.com/embed/lgYnu5T8OHY" } 
       ]
     },
