@@ -37,7 +37,7 @@
             
             <div class="anime-info-box">
                 <h1 id="baslik">Yükleniyor...</h1>
-                <div class="anime-meta" style="justify-content: flex-start; gap: 20px; margin-bottom: 20px; color: #aaa; font-size:14px;">
+                <div class="anime-meta" style="justify-content: flex-start; gap: 20px; margin-bottom: 20px; color: #aaa; font-size:13px;">
                     <span id="meta-yil"><i class="fa fa-calendar"></i> -</span>
                     <span id="meta-tur"><i class="fa fa-tags"></i> -</span>
                     <span id="meta-sure"><i class="fa fa-clock"></i> -</span>
@@ -82,9 +82,10 @@
                 </ul>
             </div>
         </div>
+        
         <div class="legal-warning">
             <p class="legal-text">Yasal Uyarı: Bu site sunucusunda herhangi bir dosya saklamamaktadır. Tüm içerikler bağımsız üçüncü parti web siteleri tarafından sağlanmaktadır.</p>
-            <p class="copyright-text">© 2025 AnimeDexTR. Geliştiren: <a href="https://kerimdemirkaynak.github.io" target="_blank" class="dev-credit">Kerim Demirkaynak</a></p>
+            <p class="copyright-text">© 2025 AnimeDexTR. Geliştiren: <span class="dev-credit">Kerim Demirkaynak</span></p>
         </div>
     </footer>
 
@@ -98,10 +99,7 @@
             script.src = `veri/detaylar/${animeId}.js`;
             script.onload = function() {
                 if (typeof ANIME_DETAY !== 'undefined') {
-                    // Ana veritabanından (seriler.js) bilgiyi bul
                     const mainData = TUM_SERILER.find(a => a.id === animeId);
-                    
-                    // Detay verisi ile ana veriyi birleştir
                     yukle(ANIME_DETAY, mainData);
                 }
             };
@@ -114,14 +112,12 @@
         function yukle(anime, mainData) {
             document.getElementById('baslik').innerText = anime.isim;
             
-            // ÖZET VE SÜRE - seriler.js'den (mainData) çekiliyor
             if(mainData) {
-                document.getElementById('ozet').innerText = mainData.ozet || anime.ozet || "Özet bulunamadı.";
+                document.getElementById('ozet').innerText = mainData.ozet || anime.ozet || "Özet yok.";
                 document.getElementById('meta-sure').innerHTML = `<i class="fa fa-clock"></i> ${mainData.sure || '?? Dk.'}`;
-                document.getElementById('meta-yil').innerHTML = `<i class="fa fa-calendar"></i> ${mainData.yil || anime.yil || '?'}`;
-                document.getElementById('meta-tur').innerHTML = `<i class="fa fa-tags"></i> ${mainData.tur || anime.tur || '?'}`;
+                document.getElementById('meta-yil').innerHTML = `<i class="fa fa-calendar"></i> ${mainData.yil || '?'}`;
+                document.getElementById('meta-tur').innerHTML = `<i class="fa fa-tags"></i> ${mainData.tur || '?'}`;
             } else {
-                // Yedek (Eğer seriler.js'de yoksa)
                 document.getElementById('ozet').innerText = anime.ozet;
             }
 
@@ -198,7 +194,7 @@
             }
         }
 
-        // Giscus Yorum Sistemi
+        // Giscus Yorum
         document.addEventListener("DOMContentLoaded", function () {
             const currentAnimeId = new URLSearchParams(window.location.search).get('id');
             if (!currentAnimeId) return;
@@ -206,7 +202,6 @@
             const giscusContainer = document.getElementById("giscus-container");
             const script = document.createElement("script");
             script.src = "https://giscus.app/client.js";
-            
             script.setAttribute("data-repo", "KerimDemirkaynak/Yorumlar");
             script.setAttribute("data-repo-id", "R_kgDOPPm0QA");
             script.setAttribute("data-category", "Yorumlar");
