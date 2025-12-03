@@ -9,15 +9,15 @@ const ANIME_DETAY = {
       "baslik": "Fragman 1",
       // ÇOKLU KAYNAK YAPISI
       "kaynaklar": [
-        { "isim": "Dailymotion", "link": "https://www.dailymotion.com/video/x20zviz" },
-        { "isim": "YouTube", "link": "https://youtu.be/lgYnu5T8OHY" } 
+        { "isim": "Dailymotion", "link": "https://www.dailymotion.com/embed/video/1jbj1okmm9ae17d807f" },
+        { "isim": "YouTube", "link": "https://youtube.com/embed/lgYnu5T8OHY" } 
       ]
     },
     {
       "no": 2,
       "baslik": "Fragman 2",
       "kaynaklar": [
-         { "isim": "YouTube", "link": "https://youtu.be/CWZOBDvvUXw" }
+         { "isim": "YouTube", "link": "https://youtube.com/embed/CWZOBDvvUXw" }
       ]
     }
     // ... diğer bölümler
