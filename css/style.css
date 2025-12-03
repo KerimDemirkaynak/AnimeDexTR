@@ -268,3 +268,63 @@ footer {
     
     #anime-listesi { grid-template-columns: repeat(2, 1fr); gap: 15px; } 
 }
+
+/* --- SLIDER KONTROLLERİ --- */
+.slider-nav-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,0.5); color: white; border: none;
+    padding: 15px; cursor: pointer; font-size: 24px; z-index: 10;
+    border-radius: 50%; transition: 0.3s;
+}
+.slider-nav-btn:hover { background: var(--primary); color: #000; }
+.prev-slide { left: 20px; }
+.next-slide { right: 20px; }
+
+/* --- DAHA FAZLA GÖSTER BUTONU --- */
+.load-more-container { text-align: center; margin-top: 30px; }
+.btn-load-more {
+    background: #333; color: white; border: 1px solid #444;
+    padding: 10px 30px; border-radius: 20px; cursor: pointer;
+    font-family: 'Poppins', sans-serif; transition: 0.3s;
+}
+.btn-load-more:hover { background: var(--primary); color: #000; border-color: var(--primary); }
+
+/* --- KAYNAK SEÇİMİ (İZLEME SAYFASI) --- */
+.source-selector {
+    margin-bottom: 20px; background: var(--bg-card); padding: 15px;
+    border-radius: 12px;
+}
+.source-title { font-size: 14px; color: var(--primary); margin-bottom: 10px; font-weight: 600; }
+.source-btn {
+    background: #151618; color: #fff; border: none; padding: 8px 15px;
+    margin-right: 10px; border-radius: 5px; cursor: pointer; font-size: 12px;
+    transition: 0.2s;
+}
+.source-btn:hover, .source-btn.active {
+    background: var(--primary); color: #000; font-weight: bold;
+}
+
+/* --- FOOTER DÜZENİ --- */
+footer { text-align: left; padding: 40px 5%; background: #111; display: block; height: auto; }
+.footer-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px; max-width: 1200px; margin: 0 auto;
+}
+.footer-col h3 { color: var(--primary); margin-bottom: 15px; font-size: 16px; }
+.footer-col p, .footer-col li a { color: #888; font-size: 13px; line-height: 1.6; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 8px; }
+.footer-col ul li a:hover { color: var(--primary); }
+.legal-warning {
+    border-top: 1px solid #222; margin-top: 30px; padding-top: 20px;
+    text-align: center; color: #555; font-size: 11px;
+}
+.dev-credit { color: var(--primary); font-weight: bold; text-decoration: none; }
+
+/* --- KATEGORİ BÖLÜMÜ --- */
+.genre-section { margin-top: 40px; }
+.genre-row { 
+    display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; 
+}
+.genre-row::-webkit-scrollbar { height: 6px; }
+.genre-row .anime-card { min-width: 160px; max-width: 160px; }
