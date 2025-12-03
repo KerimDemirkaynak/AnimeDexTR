@@ -9,7 +9,7 @@ const ANIME_DETAY = {
       "baslik": "Beyblade Savaşçısı Takao",
       // ÇOKLU KAYNAK YAPISI
       "kaynaklar": [
-        { "isim": "Sibnet", "link": "https://video.sibnet.ru/shell.php?videoid=4976317" },
+        { "isim": "Sibnet", "link": "https://www.dailymotion.com/video/x20zviz" },
         { "isim": "Yedek Player", "link": "https://www.youtube.com/embed/VIDEO_ID" } 
       ]
     },
