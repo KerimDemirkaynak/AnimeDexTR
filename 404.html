@@ -9,11 +9,19 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo"><img src="https://raw.githubusercontent.com/KerimDemirkaynak/AnimeDexTR/refs/heads/main/static/header.png" alt="AnimeDexTR"></a>
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/KerimDemirkaynak/AnimeDexTR/refs/heads/main/static/header.png" alt="AnimeDexTR">
+        </a>
+        <div class="search-box">
+            <form onsubmit="event.preventDefault(); aramaYonlendir();">
+                <input type="text" id="aramaInput" placeholder="Anime ara..." required>
+                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
     </header>
 
-    <div class="container" style="display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:60vh; text-align:center;">
-        <h1 style="font-size: 120px; color: var(--primary); line-height:1; margin-bottom:10px;">404</h1>
+    <div class="page-container page-container-center">
+        <h1 class="page-title no-border" style="font-size: 120px; margin-bottom:10px;">404</h1>
         <h2 style="color:white; font-weight:600; margin-bottom:20px;">Sayfa Bulunamadı</h2>
         <p style="color:#aaa; max-width:400px; margin-bottom:30px;">Aradığınız sayfa silinmiş, adı değiştirilmiş veya geçici olarak kullanılamıyor olabilir.</p>
         <a href="index.html" class="btn-watch">Ana Sayfaya Dön</a>
@@ -49,5 +57,12 @@
             <p class="copyright-text">© 2025 AnimeDexTR. Geliştiren: <a href="https://kerimdemirkaynak.github.io" target="_blank" class="dev-credit">Kerim Demirkaynak</a></p>
         </div>
     </footer>
+
+    <script>
+        function aramaYonlendir() {
+            const terim = document.getElementById('aramaInput').value;
+            if(terim) window.location.href = `index.html?q=${encodeURIComponent(terim)}`;
+        }
+    </script>
 </body>
 </html>

@@ -80,7 +80,7 @@
                 <a href="index.html" class="logo">
                     <img src="https://raw.githubusercontent.com/KerimDemirkaynak/AnimeDexTR/refs/heads/main/static/header.png" alt="AnimeDexTR" style="height:35px; margin-bottom:15px;">
                 </a>
-                <p>AnimeDexTR, anime severler için oluşturulmuş, yüksek kalitede ve ücretsiz bir izleme platformudur.</p>
+                <p>AnimeDexTR, anime severler için oluşturulmuş, yüksek kalitede ve ücretsiz bir izleme platformudur. Reklamsız deneyimin tadını çıkarın.</p>
             </div>
             <div class="footer-col">
                 <h3>Hızlı Erişim</h3>
@@ -95,10 +95,12 @@
                 <ul>
                     <li><a href="hakkinda.html#dmca">Telif Hakkı (DMCA)</a></li>
                     <li><a href="hakkinda.html#tos">Kullanım Şartları</a></li>
+                    <li><a href="404.html">Hata Bildir</a></li>
                 </ul>
             </div>
         </div>
         <div class="legal-warning">
+            <p class="legal-text">Yasal Uyarı: Bu site sunucusunda herhangi bir dosya saklamamaktadır. Tüm içerikler bağımsız üçüncü parti web siteleri tarafından sağlanmaktadır.</p>
             <p class="copyright-text">© 2025 AnimeDexTR. Geliştiren: <a href="https://kerimdemirkaynak.github.io" target="_blank" class="dev-credit">Kerim Demirkaynak</a></p>
         </div>
     </footer>
@@ -286,7 +288,7 @@
                 animeler.forEach(anime => {
                     const sureText = anime.bolumSayisi ? `${anime.bolumSayisi} Bölüm` : "??";
                     cardsHtml += `
-                    <a href="izle.html?id=${anime.id}" class="anime-card" style="min-width:170px; max-width:170px;">
+                    <a href="izle.html?id=${anime.id}" class="anime-card">
                         <div class="poster-box">
                             <span class="ep-tag">${sureText}</span>
                             <img src="${anime.poster}" loading="lazy">

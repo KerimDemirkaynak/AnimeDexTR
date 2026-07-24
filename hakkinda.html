@@ -13,14 +13,19 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo"><img src="https://raw.githubusercontent.com/KerimDemirkaynak/AnimeDexTR/refs/heads/main/static/header.png" alt="AnimeDexTR"></a>
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/KerimDemirkaynak/AnimeDexTR/refs/heads/main/static/header.png" alt="AnimeDexTR">
+        </a>
         <div class="search-box">
-            <a href="index.html" style="color:#aaa; font-size:13px;"><i class="fa fa-arrow-left"></i> Ana Sayfaya Dön</a>
+            <form onsubmit="event.preventDefault(); aramaYonlendir();">
+                <input type="text" id="aramaInput" placeholder="Anime ara..." required>
+                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+            </form>
         </div>
     </header>
 
-    <div class="container" style="display:block; margin-top:50px; color:#ddd; min-height:50vh;">
-        <h1 style="color:var(--primary); border-bottom:1px solid #333; padding-bottom:15px; margin-bottom:20px;">Hakkında & Yasal Uyarı</h1>
+    <div class="page-container">
+        <h1 class="page-title">Hakkında & Yasal Uyarı</h1>
         
         <p>AnimeDexTR, anime severler için oluşturulmuş, kullanıcı dostu ve modern bir izleme platformudur. Amacımız, anime kültürünü yaygınlaştırmak ve izleyicilere en iyi deneyimi sunmaktır.</p>
         <br>
@@ -67,5 +72,12 @@
             <p class="copyright-text">© 2025 AnimeDexTR. Geliştiren: <a href="https://kerimdemirkaynak.github.io" target="_blank" class="dev-credit">Kerim Demirkaynak</a></p>
         </div>
     </footer>
+
+    <script>
+        function aramaYonlendir() {
+            const terim = document.getElementById('aramaInput').value;
+            if(terim) window.location.href = `index.html?q=${encodeURIComponent(terim)}`;
+        }
+    </script>
 </body>
 </html>

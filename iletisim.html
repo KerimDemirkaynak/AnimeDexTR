@@ -13,14 +13,19 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo"><img src="https://raw.githubusercontent.com/KerimDemirkaynak/AnimeDexTR/refs/heads/main/static/header.png" alt="AnimeDexTR"></a>
+        <a href="index.html" class="logo">
+            <img src="https://raw.githubusercontent.com/KerimDemirkaynak/AnimeDexTR/refs/heads/main/static/header.png" alt="AnimeDexTR">
+        </a>
         <div class="search-box">
-            <a href="index.html" style="color:#aaa; font-size:13px;"><i class="fa fa-arrow-left"></i> Ana Sayfaya Dön</a>
+            <form onsubmit="event.preventDefault(); aramaYonlendir();">
+                <input type="text" id="aramaInput" placeholder="Anime ara..." required>
+                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+            </form>
         </div>
     </header>
 
-    <div class="container" style="display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:60vh; text-align:center;">
-        <h1 style="color:var(--primary); font-size:40px; margin-bottom:20px;">İletişim</h1>
+    <div class="page-container page-container-center">
+        <h1 class="page-title no-border">İletişim</h1>
         <p style="color:#ccc; max-width:500px; margin-bottom:30px; line-height:1.6;">
             Öneri, istek, şikayet ve telif hakkı bildirimleriniz için bizimle iletişime geçebilirsiniz. Size en kısa sürede dönüş yapmaya çalışacağız.
         </p>
@@ -64,5 +69,12 @@
             <p class="copyright-text">© 2025 AnimeDexTR. Geliştiren: <a href="https://kerimdemirkaynak.github.io" target="_blank" class="dev-credit">Kerim Demirkaynak</a></p>
         </div>
     </footer>
+
+    <script>
+        function aramaYonlendir() {
+            const terim = document.getElementById('aramaInput').value;
+            if(terim) window.location.href = `index.html?q=${encodeURIComponent(terim)}`;
+        }
+    </script>
 </body>
 </html>

@@ -181,7 +181,8 @@ header {
 
 .anime-card {
     position: relative; border-radius: var(--card-radius); overflow: hidden;
-    background: var(--bg-card); transition: transform 0.3s; display: block;
+    background: var(--bg-card); transition: transform 0.3s; 
+    display: flex; flex-direction: column; height: 100%;
 }
 .anime-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
 
@@ -202,7 +203,7 @@ header {
 .anime-card:hover .hover-play { opacity: 1; }
 .hover-play i { font-size: 40px; color: var(--primary); }
 
-.card-info { padding: 10px; }
+.card-info { padding: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 .anime-title {
     font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden;
     text-overflow: ellipsis; color: white; display: block; margin-bottom: 3px;
@@ -216,7 +217,7 @@ header {
 .genre-row { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
 .genre-row::-webkit-scrollbar { height: 6px; }
 .genre-row::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-.genre-row .anime-card { min-width: 150px; max-width: 150px; }
+.genre-row .anime-card { min-width: 170px; max-width: 170px; flex-shrink: 0; }
 
 /* --- YÜKLE BUTONU --- */
 .load-more-container { text-align: center; margin-top: 30px; }
@@ -227,10 +228,36 @@ header {
 }
 .btn-load-more:hover { background: var(--primary); color: #000; border-color: var(--primary); }
 
+/* --- ORTAK SAYFA KONTEYNERİ (Hakkında, İletişim, 404) --- */
+.page-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 0 20px;
+    color: #ddd;
+    min-height: 50vh;
+}
+.page-container-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 60vh;
+}
+.page-title {
+    color: var(--primary);
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.page-title.no-border {
+    border-bottom: none;
+    font-size: 40px;
+}
 
 /* --- İZLEME SAYFASI --- */
 .watch-container {
-    display: flex; gap: 25px; max-width: 1200px; margin: 20px auto; padding: 0 20px;
+    display: flex; gap: 25px; max-width: 1200px; width: 100%; margin: 20px auto; padding: 0 20px;
     align-items: flex-start;
 }
 
