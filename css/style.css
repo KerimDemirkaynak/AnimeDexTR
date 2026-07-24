@@ -1,392 +1,985 @@
-/* --- GENEL AYARLAR & RESET --- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* =====================================================
+   AnimeDexTR - Premium UI Design System
+   ===================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap');
+
+/* --- CSS VARIABLES --- */
 :root {
-    --bg-body: #202125;
-    --bg-header: rgba(32, 33, 37, 0.95);
-    --bg-card: #2a2c31;
-    --primary: #ffbade;
-    --primary-hover: #ff9ecd;
-    --text-white: #ffffff;
-    --text-gray: #aaaaaa;
-    --card-radius: 12px;
+    /* Core Colors */
+    --bg-body: #0d0e12;
+    --bg-header: rgba(13, 14, 18, 0.85);
+    --bg-card: #13141a;
+    --bg-card-hover: #1a1c24;
+    --bg-surface: #181920;
+    --bg-elevated: #1e2028;
+
+    /* Primary Accent - Soft Rose/Pink Gradient */
+    --primary: #f472b6;
+    --primary-soft: #fb7bb5;
+    --primary-dim: rgba(244, 114, 182, 0.15);
+    --primary-glow: rgba(244, 114, 182, 0.3);
+    --gradient-primary: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
+    --gradient-hero: linear-gradient(135deg, #f472b6 0%, #8b5cf6 50%, #3b82f6 100%);
+    --gradient-card: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.92) 100%);
+
+    /* Text */
+    --text-white: #f1f1f5;
+    --text-muted: #8b8d9a;
+    --text-faint: #4a4c5a;
+
+    /* Borders */
+    --border-subtle: rgba(255,255,255,0.06);
+    --border-glow: rgba(244,114,182,0.25);
+
+    /* Shadows */
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.5);
+    --shadow-glow: 0 0 30px rgba(244,114,182,0.2);
+    --shadow-intense: 0 20px 60px rgba(0,0,0,0.7);
+
+    /* Misc */
+    --card-radius: 14px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+/* --- RESET & BASE --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+
+html { scroll-behavior: smooth; }
 
 body {
     background-color: var(--bg-body);
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139,92,246,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(244,114,182,0.05) 0%, transparent 50%);
     color: var(--text-white);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     font-size: 14px;
+    line-height: 1.6;
 }
 
-a { text-decoration: none; color: inherit; transition: 0.3s; }
+a { text-decoration: none; color: inherit; transition: var(--transition); }
 ul { list-style: none; padding: 0; margin: 0; }
+img { display: block; }
 
-/* --- HEADER --- */
+
+/* =====================================================
+   HEADER
+   ===================================================== */
 header {
-    background-color: var(--bg-header);
-    backdrop-filter: blur(10px);
-    padding: 0 3%;
+    background: var(--bg-header);
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    padding: 0 4%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    height: 60px;
+    height: 64px;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
-.logo img { height: 30px; width: auto; object-fit: contain; }
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+}
 
-.search-box { position: relative; width: 250px; }
+.logo img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(244,114,182,0.4));
+    transition: filter var(--transition);
+}
+.logo:hover img { filter: drop-shadow(0 0 18px rgba(244,114,182,0.7)); }
+
+/* Search Box */
+.search-box { position: relative; width: 280px; }
 .search-box input {
     width: 100%;
-    background: #000;
-    border: 1px solid #333;
-    padding: 8px 35px 8px 15px;
-    border-radius: 20px;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-subtle);
+    padding: 9px 40px 9px 18px;
+    border-radius: 50px;
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
     transition: all 0.3s;
+    letter-spacing: 0.01em;
 }
-.search-box input:focus { border-color: var(--primary); }
+.search-box input::placeholder { color: var(--text-faint); }
+.search-box input:focus {
+    border-color: var(--border-glow);
+    background: rgba(244,114,182,0.07);
+    box-shadow: 0 0 0 3px rgba(244,114,182,0.1);
+}
 .search-btn {
-    position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
-    background: none; border: none; color: var(--text-gray);
-    cursor: pointer; font-size: 12px; padding: 5px;
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: var(--text-muted);
+    cursor: pointer; font-size: 13px; padding: 4px;
+    transition: color var(--transition);
 }
+.search-btn:hover { color: var(--primary); }
 
-/* --- SPOTLIGHT SLIDER (SIRALI ANİMASYONLU) --- */
+
+/* =====================================================
+   HERO / SPOTLIGHT SLIDER
+   ===================================================== */
 .hero-wrapper {
-    position: relative; width: 100%; height: 400px;
-    overflow: hidden; display: flex; align-items: center; margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+    height: 460px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
-/* Arka Plan */
 .hero-bg {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background-size: cover; background-position: center;
-    filter: blur(15px) brightness(0.4); 
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center top;
+    filter: blur(20px) brightness(0.3) saturate(1.3);
     z-index: 0;
-    transform: scale(1.05);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+    transform: scale(1.08);
+    transition: opacity 0.6s ease, transform 0.6s ease;
     opacity: 1;
 }
 
-/* İçerik Taşıyıcı */
-.hero-content {
-    position: relative; z-index: 1; width: 100%; max-width: 1200px;
-    margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 30px;
+/* Extra dark gradient overlay */
+.hero-wrapper::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(13,14,18,0.9) 0%,
+        rgba(13,14,18,0.6) 50%,
+        rgba(13,14,18,0.3) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+.hero-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to top, var(--bg-body), transparent);
+    z-index: 2;
+    pointer-events: none;
 }
 
-/* --- SIRALI ANİMASYON TANIMLARI --- */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
 
-/* 1. Tüm hareketli parçalar için ortak ayar */
-.hero-poster, 
-.hero-info h2, 
-.hero-info .hero-meta, 
-.hero-info p, 
-.hero-info .btn-watch {
-    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); /* Yumuşak yaylanma */
+/* Poster */
+.hero-poster {
+    width: 190px;
+    height: 280px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-intense), 0 0 0 2px rgba(255,255,255,0.08);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     opacity: 1;
     transform: translateY(0);
 }
 
-/* 2. GİRİŞ SIRASI (Delay Ayarları - Ekrana Gelirken) */
-.hero-poster          { transition-delay: 0ms; }   /* 1. Poster */
-.hero-info .hero-meta { transition-delay: 100ms; } /* 2. Etiketler */
-.hero-info h2         { transition-delay: 200ms; } /* 3. Başlık */
-.hero-info p          { transition-delay: 300ms; } /* 4. Açıklama */
-.hero-info .btn-watch { transition-delay: 400ms; } /* 5. Buton */
+/* Hero Info */
+.hero-info { max-width: 580px; }
 
-
-/* --- ÇIKIŞ ANİMASYONU (.changing sınıfı varken) --- */
-
-/* Arka plan kaybolur */
-.hero-wrapper.changing #hero-bg {
-    opacity: 0;
-    transform: scale(1);
+.hero-meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Tüm elemanlar aşağı kayar ve silinir (Delay olmadan, hızlıca) */
+.hero-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.hero-badge.hd {
+    background: var(--gradient-primary);
+    color: #fff;
+}
+.hero-badge.type {
+    background: rgba(255,255,255,0.1);
+    color: #ddd;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+.hero-badge.year {
+    background: rgba(255,255,255,0.07);
+    color: var(--text-muted);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.hero-info h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    color: #fff;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-info p {
+    color: rgba(255,255,255,0.65);
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered entrance delays */
+.hero-poster          { transition-delay: 0ms; }
+.hero-info .hero-meta { transition-delay: 80ms; }
+.hero-info h2         { transition-delay: 160ms; }
+.hero-info p          { transition-delay: 240ms; }
+.hero-info .btn-watch { transition-delay: 320ms; }
+
+/* Exit animation */
+.hero-wrapper.changing #hero-bg {
+    opacity: 0;
+    transform: scale(1.02);
+}
 .hero-wrapper.changing .hero-poster,
 .hero-wrapper.changing .hero-info h2,
 .hero-wrapper.changing .hero-info .hero-meta,
 .hero-wrapper.changing .hero-info p,
 .hero-wrapper.changing .hero-info .btn-watch {
     opacity: 0;
-    transform: translateY(30px); /* Aşağı it */
-    transition-delay: 0ms !important; /* Hepsini aynı anda sil */
-    transition-duration: 0.3s; /* Hızlı çıkış */
+    transform: translateY(20px);
+    transition-delay: 0ms !important;
+    transition-duration: 0.25s;
 }
 
-/* --- SLIDER İÇERİK STİLLERİ --- */
-.hero-poster {
-    width: 180px; height: 270px; border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6); object-fit: cover; flex-shrink: 0;
-}
-
-.hero-info h2 {
-    font-size: 32px;
-    font-weight: 700; line-height: 1.2; margin-bottom: 10px;
-    color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-}
-
-.hero-meta {
-    display: flex; gap: 10px; margin-bottom: 15px; font-size: 12px; color: #ddd; align-items: center;
-}
-
+/* Watch Button */
 .btn-watch {
-    background: var(--primary); color: #000; padding: 10px 25px; border-radius: 25px;
-    font-weight: 600; display: inline-flex; align-items: center; gap: 8px; font-size: 13px;
-    box-shadow: 0 5px 15px rgba(255, 186, 222, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gradient-primary);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 25px rgba(244,114,182,0.35), 0 0 0 0 rgba(244,114,182,0.4);
+    transition: all 0.3s;
+    opacity: 1;
+    transform: translateY(0);
 }
-.btn-watch:hover { transform: scale(1.05); background: var(--primary-hover); }
+.btn-watch:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 35px rgba(244,114,182,0.5), 0 0 0 4px rgba(244,114,182,0.15);
+    color: #fff;
+}
+.btn-watch i { font-size: 13px; }
 
-/* Slider Okları */
+/* Slider Navigation Buttons */
 .slider-nav-btn {
-    position: absolute; bottom: 20px; right: 20px; z-index: 10;
-    width: 40px; height: 40px;
-    background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px);
-    color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 5px;
-    cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
-    transition: 0.3s;
+    position: absolute;
+    bottom: 28px; right: 4%;
+    z-index: 10;
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
 }
-.slider-nav-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); }
-.prev-slide { right: 70px; }
-.next-slide { right: 20px; }
+.slider-nav-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 0 20px var(--primary-glow);
+    transform: scale(1.1);
+}
+.prev-slide { right: calc(4% + 52px); }
+.next-slide { right: 4%; }
+
+/* Slider Dots (progress) */
+.slider-dots {
+    position: absolute;
+    bottom: 36px;
+    left: 4%;
+    z-index: 10;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.slider-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.slider-dot.active {
+    width: 24px;
+    border-radius: 3px;
+    background: var(--primary);
+}
 
 
-/* --- LİSTE VE KARTLAR --- */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px 40px 20px; width: 100%; }
+/* =====================================================
+   MAIN CONTAINER & SECTIONS
+   ===================================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4% 60px;
+    width: 100%;
+}
 
 .section-header {
-    margin-bottom: 20px; border-left: 4px solid var(--primary); padding-left: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
 }
-.section-header h2 { font-size: 18px; font-weight: 700; color: var(--primary); }
+.section-header::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 22px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+.section-header h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-white);
+    letter-spacing: -0.01em;
+}
 
+
+/* =====================================================
+   ANIME GRID & CARDS
+   ===================================================== */
 #anime-listesi {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 18px;
 }
 
 .anime-card {
-    position: relative; border-radius: var(--card-radius); overflow: hidden;
-    background: var(--bg-card); transition: transform 0.3s; 
-    display: flex; flex-direction: column; height: 100%;
+    position: relative;
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
 }
-.anime-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+.anime-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: var(--shadow-card), 0 0 0 1px var(--border-glow);
+    border-color: rgba(244,114,182,0.2);
+    background: var(--bg-card-hover);
+}
 
-.poster-box { position: relative; width: 100%; aspect-ratio: 2/3; overflow: hidden; }
-.poster-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-.anime-card:hover .poster-box img { transform: scale(1.05); }
+.poster-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    background: #0a0a0d;
+}
+.poster-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.anime-card:hover .poster-box img { transform: scale(1.08); }
+
+/* Gradient overlay on poster */
+.poster-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-card);
+    pointer-events: none;
+}
 
 .ep-tag {
-    position: absolute; top: 6px; left: 6px; background: rgba(255,255,255,0.9);
-    color: #000; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px;
+    position: absolute;
+    top: 8px; left: 8px;
+    background: rgba(13,14,18,0.85);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.1);
+    z-index: 1;
+    letter-spacing: 0.03em;
 }
 
 .hover-play {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); display: flex; justify-content: center;
-    align-items: center; opacity: 0; transition: 0.3s;
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 2;
 }
 .anime-card:hover .hover-play { opacity: 1; }
-.hover-play i { font-size: 40px; color: var(--primary); }
+.hover-play i {
+    font-size: 46px;
+    color: #fff;
+    filter: drop-shadow(0 0 16px rgba(244,114,182,0.8));
+    transform: scale(0.85);
+    transition: transform 0.25s;
+}
+.anime-card:hover .hover-play i { transform: scale(1); }
 
-.card-info { padding: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.card-info {
+    padding: 12px 10px 10px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+}
+
 .anime-title {
-    font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden;
-    text-overflow: ellipsis; color: white; display: block; margin-bottom: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-white);
+    display: block;
+    letter-spacing: -0.01em;
 }
+
 .anime-meta {
-    font-size: 11px; color: var(--text-gray); display: flex; justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+.anime-meta span { display: flex; align-items: center; gap: 4px; }
 
-/* --- KATEGORİ ALANI --- */
-.genre-section { margin-top: 30px; }
-.genre-row { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
-.genre-row::-webkit-scrollbar { height: 6px; }
-.genre-row::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-.genre-row .anime-card { min-width: 170px; max-width: 170px; flex-shrink: 0; }
 
-/* --- YÜKLE BUTONU --- */
-.load-more-container { text-align: center; margin-top: 30px; }
+/* =====================================================
+   CATEGORY / GENRE ROWS
+   ===================================================== */
+.genre-section { margin-top: 50px; }
+
+.genre-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: #2a2c35 transparent;
+}
+.genre-row::-webkit-scrollbar { height: 4px; }
+.genre-row::-webkit-scrollbar-track { background: transparent; }
+.genre-row::-webkit-scrollbar-thumb { background: #2a2c35; border-radius: 2px; }
+.genre-row::-webkit-scrollbar-thumb:hover { background: #444; }
+.genre-row .anime-card { min-width: 160px; max-width: 160px; flex-shrink: 0; }
+
+
+/* =====================================================
+   LOAD MORE BUTTON
+   ===================================================== */
+.load-more-container { text-align: center; margin-top: 40px; }
+
 .btn-load-more {
-    background: #25262b; color: #ccc; border: 1px solid #333;
-    padding: 10px 30px; border-radius: 20px; cursor: pointer;
-    font-family: 'Poppins', sans-serif; font-size: 13px; transition: 0.3s;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-subtle);
+    padding: 11px 36px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s;
+    letter-spacing: 0.02em;
 }
-.btn-load-more:hover { background: var(--primary); color: #000; border-color: var(--primary); }
+.btn-load-more:hover {
+    background: var(--primary-dim);
+    border-color: var(--border-glow);
+    color: var(--primary);
+    box-shadow: 0 0 20px rgba(244,114,182,0.1);
+}
+.btn-load-more i { margin-left: 6px; font-size: 11px; }
 
-/* --- ORTAK SAYFA KONTEYNERİ (Hakkında, İletişim, 404) --- */
+
+/* =====================================================
+   PAGE CONTAINERS (Hakkında, İletişim, 404)
+   ===================================================== */
 .page-container {
     max-width: 800px;
-    margin: 50px auto;
-    padding: 0 20px;
-    color: #ddd;
+    margin: 60px auto;
+    padding: 0 4%;
+    color: rgba(255,255,255,0.8);
     min-height: 50vh;
 }
+
 .page-container-center {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 60vh;
-}
-.page-title {
-    color: var(--primary);
-    border-bottom: 1px solid #333;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-}
-.page-title.no-border {
-    border-bottom: none;
-    font-size: 40px;
+    min-height: 65vh;
 }
 
-/* --- İZLEME SAYFASI --- */
+.page-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-white);
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-subtle);
+    letter-spacing: -0.02em;
+}
+
+.page-title.no-border {
+    border-bottom: none;
+    font-size: 44px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding-bottom: 0;
+}
+
+.page-container h3 {
+    color: var(--text-white);
+    font-size: 17px;
+    font-weight: 600;
+    margin: 24px 0 10px;
+}
+
+.page-container p {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   WATCH PAGE
+   ===================================================== */
 .watch-container {
-    display: flex; gap: 25px; max-width: 1200px; width: 100%; margin: 20px auto; padding: 0 20px;
+    display: flex;
+    gap: 22px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 24px auto;
+    padding: 0 4%;
     align-items: flex-start;
 }
 
 .main-content { flex: 1; min-width: 0; }
-.sidebar { width: 320px; flex-shrink: 0; }
+.sidebar { width: 300px; flex-shrink: 0; }
 
+/* Video Player */
 .player-box {
-    position: relative; padding-bottom: 56.25%; background: #000;
-    border-radius: 8px; overflow: hidden; margin-bottom: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+    padding-bottom: 56.25%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-intense);
+    border: 1px solid var(--border-subtle);
 }
-.player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.player-box iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+}
 
+/* Source Selector */
 .source-selector {
-    background: var(--bg-card); padding: 12px; border-radius: 8px; margin-bottom: 20px;
+    background: var(--bg-surface);
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
-.source-title { font-size: 12px; color: var(--primary); margin-bottom: 8px; font-weight: 600; }
+.source-title {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+.source-title span { color: var(--text-white); text-transform: none; letter-spacing: 0; font-weight: 400; }
+
+#sources-list { display: flex; gap: 8px; flex-wrap: wrap; }
+
 .source-btn {
-    background: #151618; color: #fff; border: none; padding: 6px 12px;
-    margin-right: 8px; border-radius: 4px; cursor: pointer; font-size: 12px;
-    transition: 0.2s;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-muted);
+    border: 1px solid var(--border-subtle);
+    padding: 5px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
 }
-.source-btn:hover, .source-btn.active { background: var(--primary); color: #000; font-weight: 600; }
+.source-btn:hover { border-color: var(--border-glow); color: var(--primary); background: var(--primary-dim); }
+.source-btn.active {
+    background: var(--primary-dim);
+    border-color: var(--border-glow);
+    color: var(--primary);
+    font-weight: 600;
+}
 
+/* Anime Info Box */
 .anime-info-box {
-    background: var(--bg-card); padding: 20px; border-radius: 8px; margin-bottom: 20px;
+    background: var(--bg-surface);
+    padding: 22px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-subtle);
 }
-.anime-info-box h1 { color: var(--primary); margin-bottom: 10px; font-size: 22px; font-weight: 600; }
-.anime-info-box p { color: #ccc; font-size: 13px; line-height: 1.6; }
+.anime-info-box h1 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-white);
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+}
+.anime-info-box .anime-meta {
+    justify-content: flex-start;
+    gap: 18px;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+    font-size: 12px;
+    flex-wrap: wrap;
+}
+.anime-info-box .anime-meta span { display: flex; align-items: center; gap: 5px; }
+.anime-info-box .anime-meta i { color: var(--primary); font-size: 11px; }
+.anime-info-box p {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    line-height: 1.75;
+}
 
-.comments-section { background: var(--bg-card); padding: 20px; border-radius: 8px; }
-.comments-section h2 { font-size: 16px; margin-bottom: 15px; color: white; border-bottom: 1px solid #333; padding-bottom: 10px;}
+/* Comments */
+.comments-section {
+    background: var(--bg-surface);
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+}
+.comments-section h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-white);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.comments-section h2 i { color: var(--primary); }
 
-/* Bölüm Listesi */
+/* Episode List (Sidebar) */
 .ep-list-header {
-    background: #000000; padding: 12px; border-radius: 8px 8px 0 0;
-    font-weight: bold; color: var(--primary); font-size: 14px; text-align: center;
+    background: var(--bg-elevated);
+    padding: 14px 16px;
+    border-radius: 10px 10px 0 0;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: var(--text-white);
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--border-subtle);
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
-.ep-list-body {
-    background: var(--bg-card); padding: 10px; max-height: 500px;
-    overflow-y: auto; border-radius: 0 0 8px 8px;
+.ep-list-header::before {
+    content: '';
+    width: 3px; height: 14px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
 }
 
-.ep-list-body::-webkit-scrollbar { width: 6px; }
-.ep-list-body::-webkit-scrollbar-track { background: #18191d; }
-.ep-list-body::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+.ep-list-body {
+    background: var(--bg-surface);
+    padding: 10px;
+    max-height: 520px;
+    overflow-y: auto;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid var(--border-subtle);
+    border-top: none;
+    scrollbar-width: thin;
+    scrollbar-color: #2a2c35 transparent;
+}
+.ep-list-body::-webkit-scrollbar { width: 4px; }
+.ep-list-body::-webkit-scrollbar-track { background: transparent; }
+.ep-list-body::-webkit-scrollbar-thumb { background: #2a2c35; border-radius: 2px; }
 
 .ep-btn {
-    display: flex; align-items: center; padding: 10px 12px; margin-bottom: 5px;
-    background: #18191d; border-radius: 5px; cursor: pointer;
-    transition: 0.2s; font-size: 12px; color: #ccc; text-decoration: none;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    letter-spacing: -0.01em;
 }
-.ep-btn:hover, .ep-btn.active { 
-    background: #333; color: #fff; border-left: 3px solid var(--primary);
+.ep-btn:hover {
+    background: var(--primary-dim);
+    border-color: rgba(244,114,182,0.15);
+    color: var(--text-white);
 }
-.ep-btn i { margin-right: 10px; color: var(--primary); font-size: 11px; }
+.ep-btn.active {
+    background: var(--primary-dim);
+    border-color: var(--border-glow);
+    color: var(--primary);
+    font-weight: 600;
+}
+.ep-btn i { margin-right: 10px; color: var(--primary); font-size: 10px; flex-shrink: 0; }
 
 
-/* --- FOOTER --- */
+/* =====================================================
+   NOT FOUND MESSAGE
+   ===================================================== */
+#arama-sonuc-mesaji {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 40px;
+    padding: 40px 20px;
+}
+#arama-sonuc-mesaji i {
+    font-size: 48px;
+    color: var(--text-faint);
+    display: block;
+    margin-bottom: 14px;
+}
+#arama-sonuc-mesaji h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
 footer {
-    background-color: #111;
-    padding: 40px 0 20px 0;
+    background: #080910;
+    padding: 50px 0 0;
     margin-top: auto;
-    border-top: 1px solid #222;
+    border-top: 1px solid var(--border-subtle);
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 0.5fr 0.5fr;
-    gap: 30px; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 0 20px;
+    grid-template-columns: 1.6fr 0.7fr 0.7fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4% 40px;
     align-items: start;
 }
 
 .footer-col { display: flex; flex-direction: column; align-items: flex-start; }
-.footer-col p { color: #888; font-size: 13px; line-height: 1.6; margin-top: 10px; max-width: 90%; }
-.footer-col h3 { 
-    color: #fff; font-size: 15px; margin-bottom: 15px; font-weight: 600; 
-    border-left: 3px solid var(--primary); padding-left: 10px;
+
+.footer-col .logo img {
+    height: 30px;
+    margin-bottom: 14px;
+    filter: drop-shadow(0 0 8px rgba(244,114,182,0.3));
+}
+
+.footer-col p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: 88%;
+}
+
+.footer-col h3 {
+    color: var(--text-white);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 .footer-col ul { padding: 0; list-style: none; }
-.footer-col ul li { margin-bottom: 8px; }
-.footer-col ul li a { 
-    color: #aaa; font-size: 13px; transition: 0.2s; display: block;
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a {
+    color: var(--text-muted);
+    font-size: 13px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
-.footer-col ul li a:hover { color: var(--primary); padding-left: 5px; }
+.footer-col ul li a:hover {
+    color: var(--primary);
+    transform: translateX(3px);
+}
 
 .legal-warning {
-    margin-top: 40px;
-    padding: 20px;
-    background: #0d0d0d;
-    border-top: 1px solid #222;
-    text-align: center;
+    padding: 18px 4%;
+    background: rgba(0,0,0,0.4);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
-.legal-text { color: #555; font-size: 11px; margin-bottom: 5px; }
-.copyright-text { color: #777; font-size: 12px; }
-.dev-credit { color: var(--primary); font-weight: 500; }
+.legal-text { color: var(--text-faint); font-size: 11.5px; }
+.copyright-text { color: var(--text-faint); font-size: 11.5px; }
+.dev-credit { color: var(--primary); font-weight: 600; }
+.dev-credit:hover { filter: brightness(1.2); }
 
 
-/* --- RESPONSIVE --- */
-@media (max-width: 900px) {
-    header { padding: 0 15px; height: 55px; }
-    .search-box { width: 160px; }
-    .search-box input { font-size: 11px; padding: 6px 30px 6px 12px; }
-    
-    /* Spotlight Mobilde Düzenleme */
-    .hero-wrapper { height: 350px; }
-    .hero-content { 
-        flex-direction: column; 
-        justify-content: center; 
+/* =====================================================
+   ANIMATIONS / KEYFRAMES
+   ===================================================== */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.anime-card { animation: fadeInUp 0.4s ease backwards; }
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 1024px) {
+    .hero-wrapper { height: 420px; }
+}
+
+@media (max-width: 768px) {
+    header { padding: 0 4%; height: 58px; }
+    .search-box { width: 190px; }
+    .search-box input { font-size: 12px; padding: 8px 32px 8px 14px; }
+
+    /* Hero */
+    .hero-wrapper { height: 380px; margin-bottom: 28px; }
+    .hero-wrapper::before {
+        background: linear-gradient(to bottom, rgba(13,14,18,0.5) 0%, rgba(13,14,18,0.85) 100%);
+    }
+    .hero-content {
+        flex-direction: column;
+        justify-content: flex-end;
         align-items: flex-start;
-        text-align: left;
-        padding-top: 60px;
+        padding-bottom: 50px;
     }
     .hero-poster { display: none; }
-    .hero-info { width: 100%; }
-    .hero-info h2 { font-size: 28px; text-shadow: 0 2px 10px #000; }
-    .hero-meta { color: #eee; }
-    
-    .watch-container { flex-direction: column; }
-    .sidebar { width: 100%; }
-    .ep-list-body { max-height: 300px; }
+    .hero-info h2 { font-size: 26px; }
+    .hero-info p { display: none; }
 
-    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-    
+    /* Grid */
+    #anime-listesi { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    /* Watch Page */
+    .watch-container { flex-direction: column; padding: 0 4%; margin-top: 16px; }
+    .sidebar { width: 100%; }
+    .ep-list-body { max-height: 260px; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+    .legal-warning { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+    .hero-wrapper { height: 320px; }
+    .hero-info h2 { font-size: 22px; }
+    .hero-badge { font-size: 10px; padding: 2px 8px; }
+
     #anime-listesi { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .anime-card { width: 100%; }
+
+    .footer-grid { grid-template-columns: 1fr; }
 }
